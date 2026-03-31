@@ -8,6 +8,7 @@
 {% endblock %}
 
 {% block contenido %}
+{% if not user.is_authenticated %}
 <nav class="navbar navbar-expand-lg navbar-publica">
     <a class="navbar-brand" href="{% url 'core:inicio' %}"><i class="fas fa-store"></i> Sistema Libreria</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarPublica" aria-controls="navbarPublica" aria-expanded="false" aria-label="Alternar navegacion">
@@ -17,18 +18,69 @@
         <ul class="navbar-nav ml-auto align-items-lg-center">
             <li class="nav-item mr-lg-2"><span class="texto-navbar">Catalogo de productos</span></li>
             <li class="nav-item">
-                {% if user.is_authenticated %}
-                <a class="btn btn-light btn-sm" href="{% url 'productos:listar_productos' %}">Panel de gestion</a>
-                <a class="btn btn-outline-light btn-sm" href="{% url 'core:logout' %}">Cerrar sesion</a>
-                {% else %}
                 <a class="btn btn-light btn-sm" href="{% url 'core:login' %}">Iniciar sesion</a>
-                {% endif %}
             </li>
         </ul>
     </div>
 </nav>
+{% endif %}
 
 <div class="container-fluid py-3">
+    {% if not user.is_authenticated %}
+    <section class="landing-hero mb-3">
+        <div class="row align-items-center">
+            <div class="col-lg-7 mb-3 mb-lg-0">
+                <h1 class="landing-titulo">Sistema Libreria</h1>
+                <p class="landing-texto">Encuentra productos destacados, consulta disponibilidad en tiempo real y revisa precios actualizados en un solo lugar.</p>
+                <div class="landing-metricas">
+                    <div class="metrica-item">
+                        <span class="metrica-valor">{{ productos_publicados.paginator.count }}</span>
+                        <span class="metrica-label">Productos publicados</span>
+                    </div>
+                    <div class="metrica-item">
+                        <span class="metrica-valor">{{ categorias|length }}</span>
+                        <span class="metrica-label">Categorias activas</span>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-5">
+                <div class="landing-info-card">
+                    <h5><i class="fas fa-clock"></i> Horario de atencion</h5>
+                    <p class="mb-2">Lunes a Sabado, de 8:00 AM a 7:00 PM.</p>
+                    <h5><i class="fas fa-map-marker-alt"></i> Ubicacion</h5>
+                    <p class="mb-0">Centro Comercial Principal, Planta Baja.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="landing-servicios mb-3">
+        <div class="row">
+            <div class="col-lg-4 mb-3 mb-lg-0">
+                <article class="servicio-card h-100">
+                    <div class="servicio-icono"><i class="fas fa-shipping-fast"></i></div>
+                    <h4>Entrega rapida</h4>
+                    <p>Gestionamos pedidos de forma agil para que recibas tus productos en el menor tiempo posible.</p>
+                </article>
+            </div>
+            <div class="col-lg-4 mb-3 mb-lg-0">
+                <article class="servicio-card h-100">
+                    <div class="servicio-icono"><i class="fas fa-certificate"></i></div>
+                    <h4>Calidad garantizada</h4>
+                    <p>Seleccionamos productos confiables y verificados para ofrecer la mejor experiencia a nuestros clientes.</p>
+                </article>
+            </div>
+            <div class="col-lg-4">
+                <article class="servicio-card h-100">
+                    <div class="servicio-icono"><i class="fas fa-headset"></i></div>
+                    <h4>Asesoria personalizada</h4>
+                    <p>Te ayudamos a elegir el producto ideal de acuerdo a tu necesidad y presupuesto.</p>
+                </article>
+            </div>
+        </div>
+    </section>
+    {% endif %}
+
     <div class="page-header">
         <div class="page-header-content">
             <h1 class="page-title"><i class="fas fa-store"></i> Productos Publicados</h1>
@@ -139,6 +191,21 @@
             </div>
         </div>
     </div>
+
+    {% if not user.is_authenticated %}
+    <footer class="footer-publico mt-4">
+        <div class="row align-items-center">
+            <div class="col-md-7 mb-2 mb-md-0">
+                <h5 class="mb-1">Sistema Libreria</h5>
+                <p class="mb-0">Tu tienda de confianza para encontrar productos con stock y precios actualizados.</p>
+            </div>
+            <div class="col-md-5 text-md-right">
+                <span class="footer-dato"><i class="fas fa-phone-alt"></i> +58 000-0000000</span>
+                <span class="footer-dato ml-md-3"><i class="fas fa-envelope"></i> contacto@sistemalibreria.com</span>
+            </div>
+        </div>
+    </footer>
+    {% endif %}
 </div>
 {% endblock %}
 

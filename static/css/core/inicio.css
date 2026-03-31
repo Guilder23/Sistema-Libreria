@@ -1,6 +1,9 @@
 .navbar-publica {
     background: linear-gradient(90deg, #1e3a8a 0%, #0f766e 100%);
     padding: 0.75rem 1rem;
+    position: sticky;
+    top: 0;
+    z-index: 1030;
 }
 
 .navbar-publica .navbar-brand {
@@ -21,6 +24,124 @@
 
 .navbar-publica .btn-outline-light {
     margin-left: 0.35rem;
+}
+
+.landing-hero {
+    background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 55%, #0f766e 100%);
+    border-radius: 12px;
+    padding: 1.5rem;
+    color: #fff;
+}
+
+.landing-titulo {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 0.6rem;
+}
+
+.landing-texto {
+    color: rgba(255, 255, 255, 0.92);
+    max-width: 640px;
+    margin-bottom: 1rem;
+}
+
+.landing-metricas {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+.metrica-item {
+    min-width: 170px;
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 10px;
+    padding: 0.7rem 0.9rem;
+    display: flex;
+    flex-direction: column;
+}
+
+.metrica-valor {
+    font-size: 1.35rem;
+    font-weight: 700;
+    line-height: 1.2;
+}
+
+.metrica-label {
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.landing-info-card {
+    background: #fff;
+    color: #1f2937;
+    border-radius: 10px;
+    padding: 1rem;
+    border: 1px solid #e5e7eb;
+    box-shadow: 0 8px 20px rgba(15, 23, 42, 0.15);
+}
+
+.landing-info-card h5 {
+    color: #1e3a8a;
+    margin-bottom: 0.35rem;
+    font-size: 1rem;
+}
+
+.landing-servicios {
+    background: #f8fafc;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    padding: 1rem;
+}
+
+.servicio-card {
+    background: #fff;
+    border: 1px solid #dbeafe;
+    border-radius: 10px;
+    padding: 1rem;
+    box-shadow: 0 6px 16px rgba(15, 23, 42, 0.06);
+}
+
+.servicio-card h4 {
+    font-size: 1.05rem;
+    margin-bottom: 0.45rem;
+    color: #1e3a8a;
+}
+
+.servicio-card p {
+    margin-bottom: 0;
+    color: #334155;
+    font-size: 0.94rem;
+}
+
+.servicio-icono {
+    width: 40px;
+    height: 40px;
+    border-radius: 10px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: #dbeafe;
+    color: #1d4ed8;
+    margin-bottom: 0.6rem;
+}
+
+.footer-publico {
+    background: #0f172a;
+    color: #e2e8f0;
+    border-radius: 10px;
+    padding: 1rem;
+    border: 1px solid #1e293b;
+}
+
+.footer-publico h5 {
+    color: #fff;
+}
+
+.footer-dato {
+    display: inline-block;
+    margin-top: 0.2rem;
+    font-size: 0.92rem;
 }
 
 .page-header {
@@ -71,5 +192,16 @@
 @media (max-width: 991px) {
     .navbar-publica .btn {
         margin-top: 0.4rem;
+    }
+
+    .landing-titulo {
+        font-size: 1.6rem;
+    }
+}
+
+@media (max-width: 767px) {
+    .footer-dato {
+        display: block;
+        margin-left: 0;
     }
 }
