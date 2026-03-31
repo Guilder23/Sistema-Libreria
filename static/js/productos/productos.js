@@ -1,6 +1,8 @@
 document.addEventListener('DOMContentLoaded', function () {
     const inputBuscar = document.getElementById('buscar');
     const filtroEstado = document.getElementById('estado');
+    const crearImagenInput = document.getElementById('crearImagen');
+    const editImagenInput = document.getElementById('editImagen');
     const verButtons = document.querySelectorAll('.btn-ver-producto');
     const editarButtons = document.querySelectorAll('.btn-editar-producto');
     const eliminarButtons = document.querySelectorAll('.btn-eliminar-producto');
@@ -21,6 +23,45 @@ document.addEventListener('DOMContentLoaded', function () {
 
     inputBuscar?.addEventListener('input', aplicarFiltros);
     filtroEstado?.addEventListener('change', aplicarFiltros);
+
+    function pintarPreview(url, previewId, placeholderId) {
+        const preview = document.getElementById(previewId);
+        const placeholder = document.getElementById(placeholderId);
+
+        if (!preview || !placeholder) {
+            return;
+        }
+
+        if (url) {
+            preview.src = url;
+            preview.style.display = 'block';
+            placeholder.style.display = 'none';
+        } else {
+            preview.src = '';
+            preview.style.display = 'none';
+            placeholder.style.display = 'inline';
+        }
+    }
+
+    function previewDesdeInput(input, previewId, placeholderId) {
+        if (!input || !input.files || !input.files[0]) {
+            return;
+        }
+
+        const reader = new FileReader();
+        reader.onload = function (e) {
+            pintarPreview(e.target.result, previewId, placeholderId);
+        };
+        reader.readAsDataURL(input.files[0]);
+    }
+
+    crearImagenInput?.addEventListener('change', function () {
+        previewDesdeInput(this, 'crearImagenPreview', 'crearImagenSinDato');
+    });
+
+    editImagenInput?.addEventListener('change', function () {
+        previewDesdeInput(this, 'editImagenPreview', 'editImagenSinDato');
+    });
 
     verButtons.forEach(function (btn) {
         btn.addEventListener('click', function () {
@@ -63,6 +104,11 @@ document.addEventListener('DOMContentLoaded', function () {
             document.getElementById('editPrecioBs').value = this.dataset.precioBs || 0;
             document.getElementById('editActivo').checked = this.dataset.activo === '1';
             document.getElementById('editPublicado').checked = this.dataset.publicado === '1';
+
+            if (editImagenInput) {
+                editImagenInput.value = '';
+            }
+            pintarPreview(this.dataset.imagenUrl || '', 'editImagenPreview', 'editImagenSinDato');
         });
     });
 

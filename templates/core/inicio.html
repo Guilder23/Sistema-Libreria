@@ -8,6 +8,26 @@
 {% endblock %}
 
 {% block contenido %}
+<nav class="navbar navbar-expand-lg navbar-publica">
+    <a class="navbar-brand" href="{% url 'core:inicio' %}"><i class="fas fa-store"></i> Sistema Libreria</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarPublica" aria-controls="navbarPublica" aria-expanded="false" aria-label="Alternar navegacion">
+        <span><i class="fas fa-bars"></i></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarPublica">
+        <ul class="navbar-nav ml-auto align-items-lg-center">
+            <li class="nav-item mr-lg-2"><span class="texto-navbar">Catalogo de productos</span></li>
+            <li class="nav-item">
+                {% if user.is_authenticated %}
+                <a class="btn btn-light btn-sm" href="{% url 'productos:listar_productos' %}">Panel de gestion</a>
+                <a class="btn btn-outline-light btn-sm" href="{% url 'core:logout' %}">Cerrar sesion</a>
+                {% else %}
+                <a class="btn btn-light btn-sm" href="{% url 'core:login' %}">Iniciar sesion</a>
+                {% endif %}
+            </li>
+        </ul>
+    </div>
+</nav>
+
 <div class="container-fluid py-3">
     <div class="page-header">
         <div class="page-header-content">

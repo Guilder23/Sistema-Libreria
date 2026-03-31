@@ -61,7 +61,7 @@ def iniciar_sesion(request):
 @login_required
 def cerrar_sesion(request):
 	logout(request)
-	return redirect('core:login')
+	return redirect('core:inicio')
 
 
 @login_required
