@@ -1,5 +1,22 @@
 document.addEventListener('DOMContentLoaded', function () {
+    const formFiltros = document.getElementById('formFiltrosInicio');
+    const buscarInput = document.getElementById('buscarInicio');
+    const categoriaSelect = document.getElementById('categoriaInicio');
     const cards = document.querySelectorAll('.producto-click');
+
+    let filtroTimer;
+    function enviarFiltros() {
+        if (formFiltros) {
+            formFiltros.submit();
+        }
+    }
+
+    buscarInput?.addEventListener('input', function () {
+        clearTimeout(filtroTimer);
+        filtroTimer = setTimeout(enviarFiltros, 350);
+    });
+
+    categoriaSelect?.addEventListener('change', enviarFiltros);
 
     cards.forEach(function (card) {
         card.addEventListener('click', function () {

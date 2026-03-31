@@ -1,28 +1,27 @@
 document.addEventListener('DOMContentLoaded', function () {
+    const formFiltros = document.getElementById('formFiltrosProductos');
     const inputBuscar = document.getElementById('buscar');
     const filtroEstado = document.getElementById('estado');
+    const filtroCategoria = document.getElementById('categoriaProducto');
     const crearImagenInput = document.getElementById('crearImagen');
     const editImagenInput = document.getElementById('editImagen');
     const verButtons = document.querySelectorAll('.btn-ver-producto');
     const editarButtons = document.querySelectorAll('.btn-editar-producto');
     const eliminarButtons = document.querySelectorAll('.btn-eliminar-producto');
 
-    function aplicarFiltros() {
-        const termino = (inputBuscar?.value || '').toLowerCase().trim();
-        const estado = (filtroEstado?.value || '').toUpperCase().trim();
-        const filas = document.querySelectorAll('.tabla-productos tbody tr');
-
-        filas.forEach(function (fila) {
-            const texto = fila.textContent.toLowerCase();
-            const estadoFila = fila.querySelector('.badge-estado')?.textContent.trim().toUpperCase() || '';
-            const coincideTexto = !termino || texto.includes(termino);
-            const coincideEstado = !estado || estadoFila === estado;
-            fila.style.display = (coincideTexto && coincideEstado) ? '' : 'none';
-        });
+    let filtroTimer;
+    function enviarFiltros() {
+        if (formFiltros) {
+            formFiltros.submit();
+        }
     }
 
-    inputBuscar?.addEventListener('input', aplicarFiltros);
-    filtroEstado?.addEventListener('change', aplicarFiltros);
+    inputBuscar?.addEventListener('input', function () {
+        clearTimeout(filtroTimer);
+        filtroTimer = setTimeout(enviarFiltros, 350);
+    });
+    filtroEstado?.addEventListener('change', enviarFiltros);
+    filtroCategoria?.addEventListener('change', enviarFiltros);
 
     function pintarPreview(url, previewId, placeholderId) {
         const preview = document.getElementById(previewId);

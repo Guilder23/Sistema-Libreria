@@ -21,27 +21,26 @@
 
     <div class="card card-filtros mb-3">
         <div class="card-body py-3">
-            <form method="get" class="row align-items-center">
+            <form method="get" id="formFiltrosUsuarios" class="row align-items-center">
                 <div class="col-md-6 mb-2 mb-md-0">
-                    <input type="text" class="form-control form-control-sm" name="q" value="{{ q }}" placeholder="Buscar por usuario, nombre o email...">
+                    <input type="text" class="form-control form-control-sm" id="buscarUsuario" name="q" value="{{ q }}" placeholder="Buscar por usuario, nombre o email...">
                 </div>
                 <div class="col-md-2 mb-2 mb-md-0">
-                    <select name="rol" class="form-control form-control-sm">
+                    <select id="rolUsuario" name="rol" class="form-control form-control-sm">
                         <option value="">Todos los roles</option>
                         <option value="admin" {% if rol == 'admin' %}selected{% endif %}>Administradores</option>
                         <option value="usuario" {% if rol == 'usuario' %}selected{% endif %}>Usuarios</option>
                     </select>
                 </div>
                 <div class="col-md-2 mb-2 mb-md-0">
-                    <select name="estado" class="form-control form-control-sm">
+                    <select id="estadoUsuario" name="estado" class="form-control form-control-sm">
                         <option value="">Todos los estados</option>
                         <option value="activo" {% if estado == 'activo' %}selected{% endif %}>Activos</option>
                         <option value="bloqueado" {% if estado == 'bloqueado' %}selected{% endif %}>Bloqueados</option>
                     </select>
                 </div>
                 <div class="col-md-2">
-                    <button class="btn btn-primary btn-sm" type="submit">Filtrar</button>
-                    <a class="btn btn-light btn-sm" href="{% url 'core:registro' %}">Limpiar</a>
+                    <small class="text-muted">Busqueda y filtros en tiempo real.</small>
                 </div>
             </form>
         </div>

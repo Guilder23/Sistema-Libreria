@@ -1,25 +1,22 @@
 document.addEventListener('DOMContentLoaded', function () {
+    const formFiltros = document.getElementById('formFiltrosCategorias');
     const inputBuscar = document.getElementById('buscarCategoria');
     const filtroEstado = document.getElementById('estadoCategoria');
     const verButtons = document.querySelectorAll('.btn-ver-categoria');
     const editarButtons = document.querySelectorAll('.btn-editar-categoria');
 
-    function aplicarFiltros() {
-        const termino = (inputBuscar?.value || '').toLowerCase().trim();
-        const estado = (filtroEstado?.value || '').toUpperCase().trim();
-        const filas = document.querySelectorAll('.tabla-categorias tbody tr');
-
-        filas.forEach(function (fila) {
-            const texto = fila.textContent.toLowerCase();
-            const estadoFila = fila.querySelector('.badge-estado')?.textContent.trim().toUpperCase() || '';
-            const coincideTexto = !termino || texto.includes(termino);
-            const coincideEstado = !estado || estadoFila === estado;
-            fila.style.display = (coincideTexto && coincideEstado) ? '' : 'none';
-        });
+    let filtroTimer;
+    function enviarFiltros() {
+        if (formFiltros) {
+            formFiltros.submit();
+        }
     }
 
-    inputBuscar?.addEventListener('input', aplicarFiltros);
-    filtroEstado?.addEventListener('change', aplicarFiltros);
+    inputBuscar?.addEventListener('input', function () {
+        clearTimeout(filtroTimer);
+        filtroTimer = setTimeout(enviarFiltros, 350);
+    });
+    filtroEstado?.addEventListener('change', enviarFiltros);
 
     verButtons.forEach(function (btn) {
         btn.addEventListener('click', function () {

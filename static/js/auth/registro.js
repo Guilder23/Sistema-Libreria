@@ -1,7 +1,25 @@
 document.addEventListener('DOMContentLoaded', function () {
+    const formFiltros = document.getElementById('formFiltrosUsuarios');
+    const inputBuscar = document.getElementById('buscarUsuario');
+    const rolUsuario = document.getElementById('rolUsuario');
+    const estadoUsuario = document.getElementById('estadoUsuario');
     const verButtons = document.querySelectorAll('.btn-ver-usuario');
     const editarButtons = document.querySelectorAll('.btn-editar-usuario');
     const formEditar = document.getElementById('formEditarUsuario');
+
+    let filtroTimer;
+    function enviarFiltros() {
+        if (formFiltros) {
+            formFiltros.submit();
+        }
+    }
+
+    inputBuscar?.addEventListener('input', function () {
+        clearTimeout(filtroTimer);
+        filtroTimer = setTimeout(enviarFiltros, 350);
+    });
+    rolUsuario?.addEventListener('change', enviarFiltros);
+    estadoUsuario?.addEventListener('change', enviarFiltros);
 
     verButtons.forEach(function (btn) {
         btn.addEventListener('click', function () {

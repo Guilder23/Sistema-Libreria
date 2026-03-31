@@ -27,7 +27,7 @@
 
     <div class="card card-filtros">
         <div class="card-body py-3">
-            <form method="get" class="row align-items-center">
+            <form method="get" id="formFiltrosProductos" class="row align-items-center">
                 <div class="col-md-8 mb-2 mb-md-0">
                     <div class="input-group input-group-sm">
                         <div class="input-group-prepend">
@@ -44,7 +44,7 @@
                     </select>
                 </div>
                 <div class="col-md-2 mb-2 mb-md-0">
-                    <select class="form-control form-control-sm" name="categoria">
+                    <select class="form-control form-control-sm" id="categoriaProducto" name="categoria">
                         <option value="">Todas las categorias</option>
                         {% for c in categorias %}
                         <option value="{{ c.id }}" {% if categoria_id == c.id|stringformat:'s' %}selected{% endif %}>{{ c.nombre }}</option>
@@ -52,8 +52,7 @@
                     </select>
                 </div>
                 <div class="col-md-12 mt-2">
-                    <button class="btn btn-primary btn-sm" type="submit">Filtrar</button>
-                    <a class="btn btn-light btn-sm" href="{% url 'productos:listar_productos' %}">Limpiar</a>
+                    <small class="text-muted">Busqueda y filtros en tiempo real.</small>
                 </div>
             </form>
         </div>

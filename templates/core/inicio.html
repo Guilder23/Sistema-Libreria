@@ -32,16 +32,11 @@
             <div class="col-lg-7 mb-3 mb-lg-0">
                 <h1 class="landing-titulo">Sistema Libreria</h1>
                 <p class="landing-texto">Encuentra productos destacados, consulta disponibilidad en tiempo real y revisa precios actualizados en un solo lugar.</p>
-                <div class="landing-metricas">
-                    <div class="metrica-item">
-                        <span class="metrica-valor">{{ productos_publicados.paginator.count }}</span>
-                        <span class="metrica-label">Productos publicados</span>
-                    </div>
-                    <div class="metrica-item">
-                        <span class="metrica-valor">{{ categorias|length }}</span>
-                        <span class="metrica-label">Categorias activas</span>
-                    </div>
-                </div>
+                <ul class="landing-puntos">
+                    <li><i class="fas fa-check-circle"></i> Catalogo actualizado todos los dias.</li>
+                    <li><i class="fas fa-check-circle"></i> Informacion clara de stock y precios.</li>
+                    <li><i class="fas fa-check-circle"></i> Atencion personalizada en tienda.</li>
+                </ul>
             </div>
             <div class="col-lg-5">
                 <div class="landing-info-card">
@@ -90,21 +85,20 @@
 
     <div class="card card-filtros mb-3">
         <div class="card-body py-3">
-            <form method="get" class="row align-items-center">
-                <div class="col-md-8 mb-2 mb-md-0">
-                    <input type="text" class="form-control form-control-sm" name="q" value="{{ q }}" placeholder="Buscar por nombre o categoria...">
+            <form method="get" id="formFiltrosInicio" class="row align-items-center">
+                <div class="col-md-9 mb-2 mb-md-0">
+                    <input type="text" class="form-control form-control-sm" id="buscarInicio" name="q" value="{{ q }}" placeholder="Buscar por nombre o categoria...">
                 </div>
-                <div class="col-md-2 mb-2 mb-md-0">
-                    <select class="form-control form-control-sm" name="categoria">
+                <div class="col-md-3 mb-2 mb-md-0">
+                    <select class="form-control form-control-sm" id="categoriaInicio" name="categoria">
                         <option value="">Todas las categorias</option>
                         {% for c in categorias %}
                         <option value="{{ c.id }}" {% if categoria_id == c.id|stringformat:'s' %}selected{% endif %}>{{ c.nombre }}</option>
                         {% endfor %}
                     </select>
                 </div>
-                <div class="col-md-2">
-                    <button class="btn btn-primary btn-sm" type="submit">Filtrar</button>
-                    <a class="btn btn-light btn-sm" href="{% url 'core:inicio' %}">Limpiar</a>
+                <div class="col-12 mt-2">
+                    <small class="text-muted filtro-auto-ayuda">Busqueda y filtros en tiempo real.</small>
                 </div>
             </form>
         </div>
