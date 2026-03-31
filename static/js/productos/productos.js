@@ -24,6 +24,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     verButtons.forEach(function (btn) {
         btn.addEventListener('click', function () {
+            const imagenUrl = this.dataset.imagenUrl || '';
             document.getElementById('verNombre').textContent = this.dataset.nombre || '';
             document.getElementById('verCodigo').textContent = this.dataset.codigo || '';
             document.getElementById('verDetalle').textContent = this.dataset.detalle || '';
@@ -31,7 +32,18 @@ document.addEventListener('DOMContentLoaded', function () {
             document.getElementById('verStock').textContent = this.dataset.stock || '';
             document.getElementById('verPrecioUsd').textContent = this.dataset.precioUsd || '';
             document.getElementById('verPrecioBs').textContent = this.dataset.precioBs || '';
-            document.getElementById('verImagenUrl').textContent = this.dataset.imagenUrl || '-';
+
+            const imagen = document.getElementById('verImagen');
+            const imagenSinDato = document.getElementById('verImagenSinDato');
+            if (imagenUrl) {
+                imagen.src = imagenUrl;
+                imagen.style.display = 'block';
+                imagenSinDato.style.display = 'none';
+            } else {
+                imagen.src = '';
+                imagen.style.display = 'none';
+                imagenSinDato.style.display = 'inline';
+            }
         });
     });
 
@@ -44,7 +56,6 @@ document.addEventListener('DOMContentLoaded', function () {
             document.getElementById('editCodigo').value = this.dataset.codigo || '';
             document.getElementById('editNombre').value = this.dataset.nombre || '';
             document.getElementById('editDetalle').value = this.dataset.detalle || '';
-            document.getElementById('editImagenUrl').value = this.dataset.imagenUrl || '';
             document.getElementById('editCategoria').value = this.dataset.categoriaId || '';
             document.getElementById('editStock').value = this.dataset.stock || 0;
             document.getElementById('editUnidades').value = this.dataset.unidades || 1;

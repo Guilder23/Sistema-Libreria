@@ -6,12 +6,37 @@ from django.core.paginator import Paginator
 from django.db.models import Q
 from django.shortcuts import get_object_or_404, redirect, render
 
+from apps.categorias.models import Categoria
 from apps.productos.models import Producto
 
 
 def inicio(request):
-	productos_publicados = Producto.objects.select_related('categoria').filter(publicado=True, activo=True).order_by('-fecha_creacion')[:24]
-	return render(request, 'core/inicio.html', {'productos_publicados': productos_publicados})
+	productos_qs = Producto.objects.select_related('categoria').filter(publicado=True, activo=True).order_by('-fecha_creacion')
+	q = request.GET.get('q', '').strip()
+	categoria_id = request.GET.get('categoria', '').strip()
+
+	if q:
+		productos_qs = productos_qs.filter(Q(nombre__icontains=q) | Q(categoria__nombre__icontains=q))
+
+	if categoria_id:
+		productos_qs = productos_qs.filter(categoria_id=categoria_id)
+
+	paginator = Paginator(productos_qs, 12)
+	page_number = request.GET.get('page')
+	productos_publicados = paginator.get_page(page_number)
+
+	categorias = Categoria.objects.filter(productos__publicado=True, productos__activo=True).distinct().order_by('nombre')
+
+	return render(
+		request,
+		'core/inicio.html',
+		{
+			'productos_publicados': productos_publicados,
+			'categorias': categorias,
+			'q': q,
+			'categoria_id': categoria_id,
+		},
+	)
 
 
 def iniciar_sesion(request):

@@ -83,7 +83,9 @@
                     {% for producto in productos %}
                     <tr>
                         <td>
-                            {% if producto.imagen_url %}
+                            {% if producto.imagen %}
+                            <img src="{{ producto.imagen.url }}" alt="{{ producto.nombre }}" class="producto-thumb">
+                            {% elif producto.imagen_url %}
                             <img src="{{ producto.imagen_url }}" alt="{{ producto.nombre }}" class="producto-thumb">
                             {% else %}
                             <div class="producto-thumb placeholder"><i class="fas fa-image"></i></div>
@@ -120,7 +122,7 @@
                                 data-stock="{{ producto.stock_unidad }}"
                                 data-precio-usd="{{ producto.precio_usd }}"
                                 data-precio-bs="{{ producto.precio_caja_bs }}"
-                                data-imagen-url="{{ producto.imagen_url }}"
+                                data-imagen-url="{% if producto.imagen %}{{ producto.imagen.url }}{% else %}{{ producto.imagen_url }}{% endif %}"
                             ><i class="fas fa-eye"></i></button>
                             {% if can_manage %}
                             <button
@@ -131,7 +133,7 @@
                                 data-codigo="{{ producto.codigo }}"
                                 data-nombre="{{ producto.nombre }}"
                                 data-detalle="{{ producto.detalle }}"
-                                data-imagen-url="{{ producto.imagen_url }}"
+                                data-imagen-url="{% if producto.imagen %}{{ producto.imagen.url }}{% else %}{{ producto.imagen_url }}{% endif %}"
                                 data-categoria-id="{{ producto.categoria.id }}"
                                 data-stock="{{ producto.stock_unidad }}"
                                 data-unidades="{{ producto.unidades_por_caja }}"

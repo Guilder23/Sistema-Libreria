@@ -61,11 +61,12 @@ def listar_productos(request):
 def crear_producto(request):
 	if request.method == 'POST':
 		categoria = get_object_or_404(Categoria, id=request.POST.get('categoria_id'))
+		imagen = request.FILES.get('imagen')
 		producto = Producto.objects.create(
 			codigo=request.POST.get('codigo', '').strip(),
 			nombre=request.POST.get('nombre', '').strip(),
 			detalle=request.POST.get('detalle', '').strip(),
-			imagen_url=request.POST.get('imagen_url', '').strip(),
+			imagen=imagen,
 			categoria=categoria,
 			stock_unidad=int(request.POST.get('stock_unidad', 0) or 0),
 			unidades_por_caja=int(request.POST.get('unidades_por_caja', 1) or 1),
@@ -88,7 +89,6 @@ def editar_producto(request, producto_id):
 		producto.codigo = request.POST.get('codigo', '').strip()
 		producto.nombre = request.POST.get('nombre', '').strip()
 		producto.detalle = request.POST.get('detalle', '').strip()
-		producto.imagen_url = request.POST.get('imagen_url', '').strip()
 		producto.categoria = categoria
 		producto.stock_unidad = int(request.POST.get('stock_unidad', 0) or 0)
 		producto.unidades_por_caja = int(request.POST.get('unidades_por_caja', 1) or 1)
@@ -96,6 +96,12 @@ def editar_producto(request, producto_id):
 		producto.precio_caja_bs = Decimal(request.POST.get('precio_caja_bs', '0') or '0')
 		producto.activo = request.POST.get('activo') == 'on'
 		producto.publicado = request.POST.get('publicado') == 'on'
+
+		imagen = request.FILES.get('imagen')
+		if imagen:
+			producto.imagen = imagen
+			producto.imagen_url = ''
+
 		producto.save()
 		registrar_cambio(producto, request.user, 'EDITAR', 'Edicion de producto')
 		messages.success(request, 'Producto actualizado.')

@@ -1,7 +1,7 @@
 ﻿<div class="modal fade" id="modalCrearProducto" tabindex="-1" role="dialog" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content modal-crear-productos">
-            <form method="post" action="{% url 'productos:crear_producto' %}">
+            <form method="post" action="{% url 'productos:crear_producto' %}" enctype="multipart/form-data">
                 {% csrf_token %}
             <div class="modal-header">
                 <h5 class="modal-title">Crear Producto</h5>
@@ -23,8 +23,8 @@
                     <input type="text" name="detalle" class="form-control" required>
                 </div>
                 <div class="form-group">
-                    <label>URL de Imagen</label>
-                    <input type="url" name="imagen_url" class="form-control" placeholder="https://...">
+                    <label>Imagen del producto</label>
+                    <input type="file" name="imagen" class="form-control-file" accept="image/*">
                 </div>
                 <div class="form-group">
                     <label>Categoria</label>

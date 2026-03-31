@@ -5,6 +5,7 @@ class Producto(models.Model):
 	codigo = models.CharField(max_length=30, unique=True)
 	nombre = models.CharField(max_length=140, default='')
 	detalle = models.CharField(max_length=220)
+	imagen = models.ImageField(upload_to='productos/', blank=True, null=True)
 	imagen_url = models.URLField(blank=True)
 	categoria = models.ForeignKey('categorias.Categoria', on_delete=models.PROTECT, related_name='productos')
 	stock_unidad = models.PositiveIntegerField(default=0)

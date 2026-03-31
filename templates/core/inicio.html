@@ -16,11 +16,45 @@
         </div>
     </div>
 
+    <div class="card card-filtros mb-3">
+        <div class="card-body py-3">
+            <form method="get" class="row align-items-center">
+                <div class="col-md-8 mb-2 mb-md-0">
+                    <input type="text" class="form-control form-control-sm" name="q" value="{{ q }}" placeholder="Buscar por nombre o categoria...">
+                </div>
+                <div class="col-md-2 mb-2 mb-md-0">
+                    <select class="form-control form-control-sm" name="categoria">
+                        <option value="">Todas las categorias</option>
+                        {% for c in categorias %}
+                        <option value="{{ c.id }}" {% if categoria_id == c.id|stringformat:'s' %}selected{% endif %}>{{ c.nombre }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+                <div class="col-md-2">
+                    <button class="btn btn-primary btn-sm" type="submit">Filtrar</button>
+                    <a class="btn btn-light btn-sm" href="{% url 'core:inicio' %}">Limpiar</a>
+                </div>
+            </form>
+        </div>
+    </div>
+
     <div class="row">
         {% for p in productos_publicados %}
         <div class="col-xl-3 col-lg-4 col-md-6 mb-3">
-            <div class="card producto-card h-100">
-                {% if p.imagen_url %}
+            <div class="card producto-card h-100 producto-click"
+                 data-toggle="modal"
+                 data-target="#modalProductoInicio"
+                 data-nombre="{{ p.nombre }}"
+                 data-categoria="{{ p.categoria.nombre }}"
+                 data-detalle="{{ p.detalle }}"
+                 data-codigo="{{ p.codigo }}"
+                 data-stock="{{ p.stock_unidad }}"
+                 data-precio-usd="{{ p.precio_usd }}"
+                 data-precio-bs="{{ p.precio_caja_bs }}"
+                 data-imagen="{% if p.imagen %}{{ p.imagen.url }}{% else %}{{ p.imagen_url }}{% endif %}">
+                {% if p.imagen %}
+                <img src="{{ p.imagen.url }}" class="card-img-top producto-card-img" alt="{{ p.nombre }}">
+                {% elif p.imagen_url %}
                 <img src="{{ p.imagen_url }}" class="card-img-top producto-card-img" alt="{{ p.nombre }}">
                 {% else %}
                 <div class="card-img-top producto-card-img placeholder d-flex align-items-center justify-content-center">
@@ -43,5 +77,51 @@
         </div>
         {% endfor %}
     </div>
+
+    {% if productos_publicados.paginator.num_pages > 1 %}
+    <nav class="mt-2">
+        <ul class="pagination pagination-sm mb-0">
+            {% if productos_publicados.has_previous %}
+            <li class="page-item"><a class="page-link" href="?page={{ productos_publicados.previous_page_number }}&q={{ q }}&categoria={{ categoria_id }}">Anterior</a></li>
+            {% endif %}
+            <li class="page-item active"><span class="page-link">{{ productos_publicados.number }}</span></li>
+            {% if productos_publicados.has_next %}
+            <li class="page-item"><a class="page-link" href="?page={{ productos_publicados.next_page_number }}&q={{ q }}&categoria={{ categoria_id }}">Siguiente</a></li>
+            {% endif %}
+        </ul>
+    </nav>
+    {% endif %}
+
+    <div class="modal fade" id="modalProductoInicio" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header bg-primary text-white">
+                    <h5 class="modal-title" id="inicioModalNombre">Detalle del producto</h5>
+                    <button type="button" class="close text-white" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-5 mb-3 mb-md-0">
+                            <img id="inicioModalImagen" src="" alt="Imagen" class="img-fluid border rounded" style="max-height:260px; width: 100%; object-fit: cover;">
+                        </div>
+                        <div class="col-md-7">
+                            <p><strong>Categoria:</strong> <span id="inicioModalCategoria"></span></p>
+                            <p><strong>Codigo:</strong> <span id="inicioModalCodigo"></span></p>
+                            <p><strong>Descripcion:</strong> <span id="inicioModalDetalle"></span></p>
+                            <p><strong>Stock:</strong> <span id="inicioModalStock"></span> unidades</p>
+                            <p><strong>Precio USD:</strong> <span id="inicioModalPrecioUsd"></span></p>
+                            <p><strong>Precio Bs:</strong> <span id="inicioModalPrecioBs"></span></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+{% endblock %}
+
+{% block scripts_extra %}
+<script src="{% static 'js/core/inicio.js' %}"></script>
 {% endblock %}
