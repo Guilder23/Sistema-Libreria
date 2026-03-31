@@ -3,6 +3,8 @@ document.addEventListener('DOMContentLoaded', function () {
     const inputBuscar = document.getElementById('buscar');
     const filtroEstado = document.getElementById('estado');
     const filtroCategoria = document.getElementById('categoriaProducto');
+    const filtroPublicado = document.getElementById('publicadoProducto');
+    const filtroStock = document.getElementById('stockProducto');
     const crearImagenInput = document.getElementById('crearImagen');
     const editImagenInput = document.getElementById('editImagen');
     const verButtons = document.querySelectorAll('.btn-ver-producto');
@@ -22,6 +24,8 @@ document.addEventListener('DOMContentLoaded', function () {
     });
     filtroEstado?.addEventListener('change', enviarFiltros);
     filtroCategoria?.addEventListener('change', enviarFiltros);
+    filtroPublicado?.addEventListener('change', enviarFiltros);
+    filtroStock?.addEventListener('change', enviarFiltros);
 
     function pintarPreview(url, previewId, placeholderId) {
         const preview = document.getElementById(previewId);
@@ -70,8 +74,8 @@ document.addEventListener('DOMContentLoaded', function () {
             document.getElementById('verDetalle').textContent = this.dataset.detalle || '';
             document.getElementById('verCategoria').textContent = this.dataset.categoria || '';
             document.getElementById('verStock').textContent = this.dataset.stock || '';
-            document.getElementById('verPrecioUsd').textContent = this.dataset.precioUsd || '';
-            document.getElementById('verPrecioBs').textContent = this.dataset.precioBs || '';
+            document.getElementById('verPrecioUnidadBs').textContent = this.dataset.precioUnidadBs || '';
+            document.getElementById('verPrecioCajaBs').textContent = this.dataset.precioCajaBs || '';
 
             const imagen = document.getElementById('verImagen');
             const imagenSinDato = document.getElementById('verImagenSinDato');
@@ -99,8 +103,8 @@ document.addEventListener('DOMContentLoaded', function () {
             document.getElementById('editCategoria').value = this.dataset.categoriaId || '';
             document.getElementById('editStock').value = this.dataset.stock || 0;
             document.getElementById('editUnidades').value = this.dataset.unidades || 1;
-            document.getElementById('editPrecioUsd').value = this.dataset.precioUsd || 0;
-            document.getElementById('editPrecioBs').value = this.dataset.precioBs || 0;
+            document.getElementById('editPrecioUsd').value = this.dataset.precioUnidadBs || 0;
+            document.getElementById('editPrecioBs').value = this.dataset.precioCajaBs || 0;
             document.getElementById('editActivo').checked = this.dataset.activo === '1';
             document.getElementById('editPublicado').checked = this.dataset.publicado === '1';
 

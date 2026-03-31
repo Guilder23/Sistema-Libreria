@@ -21,6 +21,8 @@ def listar_productos(request):
 	q = request.GET.get('q', '').strip()
 	estado = request.GET.get('estado', '').strip().upper()
 	categoria_id = request.GET.get('categoria', '').strip()
+	publicado = request.GET.get('publicado', '').strip().upper()
+	stock = request.GET.get('stock', '').strip().upper()
 
 	if q:
 		productos_qs = productos_qs.filter(
@@ -38,6 +40,16 @@ def listar_productos(request):
 	if categoria_id:
 		productos_qs = productos_qs.filter(categoria_id=categoria_id)
 
+	if publicado == 'SI':
+		productos_qs = productos_qs.filter(publicado=True)
+	elif publicado == 'NO':
+		productos_qs = productos_qs.filter(publicado=False)
+
+	if stock == 'CON':
+		productos_qs = productos_qs.filter(stock_unidad__gt=0)
+	elif stock == 'SIN':
+		productos_qs = productos_qs.filter(stock_unidad=0)
+
 	paginator = Paginator(productos_qs, 10)
 	page_number = request.GET.get('page')
 	productos = paginator.get_page(page_number)
@@ -51,6 +63,8 @@ def listar_productos(request):
 			'q': q,
 			'estado': estado,
 			'categoria_id': categoria_id,
+			'publicado': publicado,
+			'stock': stock,
 			'can_manage': can_manage_inventory(request.user),
 		},
 	)

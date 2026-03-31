@@ -27,31 +27,51 @@
 
     <div class="card card-filtros">
         <div class="card-body py-3">
-            <form method="get" id="formFiltrosProductos" class="row align-items-center">
-                <div class="col-md-8 mb-2 mb-md-0">
-                    <div class="input-group input-group-sm">
-                        <div class="input-group-prepend">
-                            <span class="input-group-text bg-white border-right-0"><i class="fas fa-search text-muted"></i></span>
+            <form method="get" id="formFiltrosProductos" class="filtros-productos-form">
+                <div class="filtros-productos-linea">
+                    <div class="filtro-busqueda">
+                        <div class="input-group input-group-sm">
+                            <div class="input-group-prepend">
+                                <span class="input-group-text bg-white border-right-0"><i class="fas fa-search text-muted"></i></span>
+                            </div>
+                            <input type="text" class="form-control form-control-sm border-left-0" id="buscar" name="q" value="{{ q }}" placeholder="Buscar por codigo, nombre o categoria...">
                         </div>
-                        <input type="text" class="form-control form-control-sm border-left-0" id="buscar" name="q" value="{{ q }}" placeholder="Buscar por codigo, nombre o categoria...">
                     </div>
-                </div>
-                <div class="col-md-2 mb-2 mb-md-0">
+
+                    <div class="filtro-item">
                     <select class="form-control form-control-sm" id="estado" name="estado">
                         <option value="">Todos los estados</option>
                         <option value="ACTIVO" {% if estado == 'ACTIVO' %}selected{% endif %}>Activos</option>
                         <option value="INACTIVO" {% if estado == 'INACTIVO' %}selected{% endif %}>Inactivos</option>
                     </select>
-                </div>
-                <div class="col-md-2 mb-2 mb-md-0">
+                    </div>
+
+                    <div class="filtro-item">
                     <select class="form-control form-control-sm" id="categoriaProducto" name="categoria">
                         <option value="">Todas las categorias</option>
                         {% for c in categorias %}
                         <option value="{{ c.id }}" {% if categoria_id == c.id|stringformat:'s' %}selected{% endif %}>{{ c.nombre }}</option>
                         {% endfor %}
                     </select>
+                    </div>
+
+                    <div class="filtro-item">
+                    <select class="form-control form-control-sm" id="publicadoProducto" name="publicado">
+                        <option value="">Publicacion</option>
+                        <option value="SI" {% if publicado == 'SI' %}selected{% endif %}>Publicados</option>
+                        <option value="NO" {% if publicado == 'NO' %}selected{% endif %}>No publicados</option>
+                    </select>
+                    </div>
+
+                    <div class="filtro-item">
+                    <select class="form-control form-control-sm" id="stockProducto" name="stock">
+                        <option value="">Disponibilidad</option>
+                        <option value="CON" {% if stock == 'CON' %}selected{% endif %}>Con stock</option>
+                        <option value="SIN" {% if stock == 'SIN' %}selected{% endif %}>Sin stock</option>
+                    </select>
+                    </div>
                 </div>
-                <div class="col-md-12 mt-2">
+                <div class="mt-2">
                     <small class="text-muted">Busqueda y filtros en tiempo real.</small>
                 </div>
             </form>
@@ -71,11 +91,11 @@
                         <th>Stock Unidad</th>
                         <th>Unid/Caja</th>
                         <th>Stock Caja</th>
-                        <th>Precio USD</th>
-                        <th>Precio Caja</th>
+                        <th>Precio Unidad (Bs)</th>
+                        <th>Precio Caja (Bs)</th>
                         <th>Publicado</th>
                         <th>Estado</th>
-                        <th class="text-center">Acciones</th>
+                        <th class="text-center acciones-col-head">Acciones</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -91,13 +111,13 @@
                             {% endif %}
                         </td>
                         <td><span class="codigo-badge">{{ producto.codigo }}</span></td>
-                        <td>{{ producto.nombre }}</td>
-                        <td>{{ producto.detalle }}</td>
+                        <td><span class="producto-nombre">{{ producto.nombre }}</span></td>
+                        <td><span class="producto-detalle">{{ producto.detalle }}</span></td>
                         <td>{{ producto.categoria.nombre }}</td>
                         <td><span class="badge-stock">{{ producto.stock_unidad }} unidades</span></td>
                         <td>{{ producto.unidades_por_caja }}</td>
                         <td><span class="badge-stock">{{ producto.stock_caja }} cajas</span></td>
-                        <td>USD {{ producto.precio_usd|floatformat:2 }}</td>
+                        <td>Bs. {{ producto.precio_usd|floatformat:2 }}</td>
                         <td>Bs. {{ producto.precio_caja_bs|floatformat:2 }}</td>
                         <td>
                             <span class="badge-estado {% if producto.publicado %}badge-estado-activo{% else %}badge-estado-inactivo{% endif %}">
@@ -119,8 +139,8 @@
                                 data-detalle="{{ producto.detalle }}"
                                 data-categoria="{{ producto.categoria.nombre }}"
                                 data-stock="{{ producto.stock_unidad }}"
-                                data-precio-usd="{{ producto.precio_usd }}"
-                                data-precio-bs="{{ producto.precio_caja_bs }}"
+                                data-precio-unidad-bs="{{ producto.precio_usd }}"
+                                data-precio-caja-bs="{{ producto.precio_caja_bs }}"
                                 data-imagen-url="{% if producto.imagen %}{{ producto.imagen.url }}{% else %}{{ producto.imagen_url }}{% endif %}"
                             ><i class="fas fa-eye"></i></button>
                             {% if can_manage %}
@@ -136,8 +156,8 @@
                                 data-categoria-id="{{ producto.categoria.id }}"
                                 data-stock="{{ producto.stock_unidad }}"
                                 data-unidades="{{ producto.unidades_por_caja }}"
-                                data-precio-usd="{{ producto.precio_usd }}"
-                                data-precio-bs="{{ producto.precio_caja_bs }}"
+                                data-precio-unidad-bs="{{ producto.precio_usd }}"
+                                data-precio-caja-bs="{{ producto.precio_caja_bs }}"
                                 data-activo="{{ producto.activo|yesno:'1,0' }}"
                                 data-publicado="{{ producto.publicado|yesno:'1,0' }}"
                             ><i class="fas fa-edit"></i></button>
@@ -172,7 +192,7 @@
         <ul class="pagination pagination-sm mb-0">
             {% if productos.has_previous %}
             <li class="page-item">
-                <a class="page-link" href="?page={{ productos.previous_page_number }}&q={{ q }}&estado={{ estado }}&categoria={{ categoria_id }}">Anterior</a>
+                <a class="page-link" href="?page={{ productos.previous_page_number }}&q={{ q }}&estado={{ estado }}&categoria={{ categoria_id }}&publicado={{ publicado }}&stock={{ stock }}">Anterior</a>
             </li>
             {% endif %}
 
@@ -180,7 +200,7 @@
 
             {% if productos.has_next %}
             <li class="page-item">
-                <a class="page-link" href="?page={{ productos.next_page_number }}&q={{ q }}&estado={{ estado }}&categoria={{ categoria_id }}">Siguiente</a>
+                <a class="page-link" href="?page={{ productos.next_page_number }}&q={{ q }}&estado={{ estado }}&categoria={{ categoria_id }}&publicado={{ publicado }}&stock={{ stock }}">Siguiente</a>
             </li>
             {% endif %}
         </ul>

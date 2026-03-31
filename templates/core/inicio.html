@@ -65,8 +65,8 @@
                  data-detalle="{{ p.detalle }}"
                  data-codigo="{{ p.codigo }}"
                  data-stock="{{ p.stock_unidad }}"
-                 data-precio-usd="{{ p.precio_usd }}"
-                 data-precio-bs="{{ p.precio_caja_bs }}"
+                 data-precio-unidad-bs="{{ p.precio_usd }}"
+                 data-precio-caja-bs="{{ p.precio_caja_bs }}"
                  data-imagen="{% if p.imagen %}{{ p.imagen.url }}{% else %}{{ p.imagen_url }}{% endif %}">
                 {% if p.imagen %}
                 <img src="{{ p.imagen.url }}" class="card-img-top producto-card-img" alt="{{ p.nombre }}">
@@ -83,7 +83,7 @@
                     <p class="card-text mb-2">{{ p.detalle }}</p>
                     <p class="mb-1"><strong>Codigo:</strong> {{ p.codigo }}</p>
                     <p class="mb-1"><strong>Stock:</strong> {{ p.stock_unidad }} unidades</p>
-                    <p class="mb-0"><strong>Precio:</strong> USD {{ p.precio_usd|floatformat:2 }} / Bs {{ p.precio_caja_bs|floatformat:2 }}</p>
+                    <p class="mb-0"><strong>Precio:</strong> Bs {{ p.precio_usd|floatformat:2 }} unidad / Bs {{ p.precio_caja_bs|floatformat:2 }} caja</p>
                 </div>
             </div>
         </div>
@@ -183,8 +183,8 @@
                             <p><strong>Codigo:</strong> <span id="inicioModalCodigo"></span></p>
                             <p><strong>Descripcion:</strong> <span id="inicioModalDetalle"></span></p>
                             <p><strong>Stock:</strong> <span id="inicioModalStock"></span> unidades</p>
-                            <p><strong>Precio USD:</strong> <span id="inicioModalPrecioUsd"></span></p>
-                            <p><strong>Precio Bs:</strong> <span id="inicioModalPrecioBs"></span></p>
+                            <p><strong>Precio por unidad (Bs):</strong> <span id="inicioModalPrecioUnidadBs"></span></p>
+                            <p><strong>Precio por caja (Bs):</strong> <span id="inicioModalPrecioCajaBs"></span></p>
                         </div>
                     </div>
                 </div>

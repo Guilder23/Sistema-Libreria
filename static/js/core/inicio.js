@@ -26,8 +26,8 @@ document.addEventListener('DOMContentLoaded', function () {
             document.getElementById('inicioModalCodigo').textContent = this.dataset.codigo || '';
             document.getElementById('inicioModalDetalle').textContent = this.dataset.detalle || '';
             document.getElementById('inicioModalStock').textContent = this.dataset.stock || '0';
-            document.getElementById('inicioModalPrecioUsd').textContent = this.dataset.precioUsd || '0';
-            document.getElementById('inicioModalPrecioBs').textContent = this.dataset.precioBs || '0';
+            document.getElementById('inicioModalPrecioUnidadBs').textContent = this.dataset.precioUnidadBs || '0';
+            document.getElementById('inicioModalPrecioCajaBs').textContent = this.dataset.precioCajaBs || '0';
 
             const img = document.getElementById('inicioModalImagen');
             if (imagen) {
