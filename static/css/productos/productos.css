@@ -1,0 +1,108 @@
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1.5rem;
+    padding: 1.5rem 2rem;
+    background: #1e3a8a;
+    border-radius: 0.5rem;
+    color: white;
+}
+
+.page-title {
+    margin: 0;
+    font-size: 1.8rem;
+    font-weight: 600;
+}
+
+.page-subtitle {
+    margin: 0.25rem 0 0;
+    color: rgba(255, 255, 255, 0.92);
+}
+
+.card-filtros {
+    margin-bottom: 1rem;
+    border: 1px solid #e5e7eb;
+}
+
+.card-tabla {
+    border: 1px solid #e5e7eb;
+}
+
+.tabla-productos thead {
+    background: #3b82f6;
+}
+
+.tabla-productos thead th {
+    color: #fff;
+    border: none;
+    font-size: 0.78rem;
+    text-transform: uppercase;
+}
+
+.codigo-badge {
+    display: inline-block;
+    padding: 0.3rem 0.6rem;
+    border-radius: 0.25rem;
+    border: 1px solid #93c5fd;
+    color: #1e40af;
+    background: #dbeafe;
+    font-weight: 600;
+}
+
+.badge-stock {
+    display: inline-block;
+    padding: 0.2rem 0.45rem;
+    border: 1px solid #a7f3d0;
+    border-radius: 0.25rem;
+    color: #065f46;
+    background: #d1fae5;
+}
+
+.badge-estado {
+    display: inline-block;
+    padding: 0.2rem 0.5rem;
+    border-radius: 0.25rem;
+    border: 1px solid;
+    font-size: 0.72rem;
+}
+
+.badge-estado-activo {
+    color: #065f46;
+    background: #d1fae5;
+    border-color: #6ee7b7;
+}
+
+.badge-estado-inactivo {
+    color: #991b1b;
+    background: #fee2e2;
+    border-color: #fca5a5;
+}
+
+.acciones-col .btn {
+    margin-right: 0.2rem;
+}
+
+.producto-thumb {
+    width: 42px;
+    height: 42px;
+    object-fit: cover;
+    border-radius: 6px;
+    border: 1px solid #d1d5db;
+}
+
+.producto-thumb.placeholder {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: #f3f4f6;
+    color: #9ca3af;
+}
+
+@media (max-width: 768px) {
+    .page-header {
+        flex-direction: column;
+        text-align: center;
+        gap: 1rem;
+    }
+}

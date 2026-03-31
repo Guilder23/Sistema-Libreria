@@ -1,0 +1,47 @@
+{% extends 'base/base.html' %}
+{% load static %}
+
+{% block titulo %}Inicio{% endblock %}
+
+{% block estilos_extra %}
+<link rel="stylesheet" href="{% static 'css/core/inicio.css' %}">
+{% endblock %}
+
+{% block contenido %}
+<div class="container-fluid py-3">
+    <div class="page-header">
+        <div class="page-header-content">
+            <h1 class="page-title"><i class="fas fa-store"></i> Productos Publicados</h1>
+            <p class="page-subtitle">Catalogo visible para todos los usuarios del sistema</p>
+        </div>
+    </div>
+
+    <div class="row">
+        {% for p in productos_publicados %}
+        <div class="col-xl-3 col-lg-4 col-md-6 mb-3">
+            <div class="card producto-card h-100">
+                {% if p.imagen_url %}
+                <img src="{{ p.imagen_url }}" class="card-img-top producto-card-img" alt="{{ p.nombre }}">
+                {% else %}
+                <div class="card-img-top producto-card-img placeholder d-flex align-items-center justify-content-center">
+                    <i class="fas fa-image fa-2x text-muted"></i>
+                </div>
+                {% endif %}
+                <div class="card-body">
+                    <h5 class="card-title mb-1">{{ p.nombre }}</h5>
+                    <p class="text-muted mb-2">{{ p.categoria.nombre }}</p>
+                    <p class="card-text mb-2">{{ p.detalle }}</p>
+                    <p class="mb-1"><strong>Codigo:</strong> {{ p.codigo }}</p>
+                    <p class="mb-1"><strong>Stock:</strong> {{ p.stock_unidad }} unidades</p>
+                    <p class="mb-0"><strong>Precio:</strong> USD {{ p.precio_usd|floatformat:2 }} / Bs {{ p.precio_caja_bs|floatformat:2 }}</p>
+                </div>
+            </div>
+        </div>
+        {% empty %}
+        <div class="col-12">
+            <div class="alert alert-info">No hay productos publicados por el momento.</div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% endblock %}
