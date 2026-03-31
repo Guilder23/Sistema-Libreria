@@ -29,12 +29,12 @@
 .landing-hero {
     background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 55%, #0f766e 100%);
     border-radius: 12px;
-    padding: 1.5rem;
+    padding: 1.7rem;
     color: #fff;
 }
 
 .landing-titulo {
-    font-size: 2rem;
+    font-size: 1.85rem;
     font-weight: 700;
     margin-bottom: 0.6rem;
 }
@@ -84,12 +84,40 @@
     padding: 1rem;
 }
 
+.info-profesional {
+    background: #f8fafc;
+    border: 1px solid #dbeafe;
+    border-radius: 12px;
+    padding: 1.1rem;
+}
+
+.info-profesional-header {
+    margin-bottom: 0.9rem;
+}
+
+.info-profesional-header h3 {
+    font-size: 1.28rem;
+    margin: 0 0 0.25rem;
+    color: #1e3a8a;
+}
+
+.info-profesional-header p {
+    margin: 0;
+    color: #475569;
+}
+
 .servicio-card {
     background: #fff;
-    border: 1px solid #dbeafe;
+    border: 1px solid #cfe0ff;
     border-radius: 10px;
-    padding: 1rem;
-    box-shadow: 0 6px 16px rgba(15, 23, 42, 0.06);
+    padding: 1.05rem;
+    box-shadow: 0 10px 22px rgba(15, 23, 42, 0.08);
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.servicio-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 14px 28px rgba(15, 23, 42, 0.12);
 }
 
 .servicio-card h4 {

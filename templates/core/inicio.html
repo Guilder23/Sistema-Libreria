@@ -26,56 +26,6 @@
 {% endif %}
 
 <div class="container-fluid py-3">
-    {% if not user.is_authenticated %}
-    <section class="landing-hero mb-3">
-        <div class="row align-items-center">
-            <div class="col-lg-7 mb-3 mb-lg-0">
-                <h1 class="landing-titulo">Sistema Libreria</h1>
-                <p class="landing-texto">Encuentra productos destacados, consulta disponibilidad en tiempo real y revisa precios actualizados en un solo lugar.</p>
-                <ul class="landing-puntos">
-                    <li><i class="fas fa-check-circle"></i> Catalogo actualizado todos los dias.</li>
-                    <li><i class="fas fa-check-circle"></i> Informacion clara de stock y precios.</li>
-                    <li><i class="fas fa-check-circle"></i> Atencion personalizada en tienda.</li>
-                </ul>
-            </div>
-            <div class="col-lg-5">
-                <div class="landing-info-card">
-                    <h5><i class="fas fa-clock"></i> Horario de atencion</h5>
-                    <p class="mb-2">Lunes a Sabado, de 8:00 AM a 7:00 PM.</p>
-                    <h5><i class="fas fa-map-marker-alt"></i> Ubicacion</h5>
-                    <p class="mb-0">Centro Comercial Principal, Planta Baja.</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="landing-servicios mb-3">
-        <div class="row">
-            <div class="col-lg-4 mb-3 mb-lg-0">
-                <article class="servicio-card h-100">
-                    <div class="servicio-icono"><i class="fas fa-shipping-fast"></i></div>
-                    <h4>Entrega rapida</h4>
-                    <p>Gestionamos pedidos de forma agil para que recibas tus productos en el menor tiempo posible.</p>
-                </article>
-            </div>
-            <div class="col-lg-4 mb-3 mb-lg-0">
-                <article class="servicio-card h-100">
-                    <div class="servicio-icono"><i class="fas fa-certificate"></i></div>
-                    <h4>Calidad garantizada</h4>
-                    <p>Seleccionamos productos confiables y verificados para ofrecer la mejor experiencia a nuestros clientes.</p>
-                </article>
-            </div>
-            <div class="col-lg-4">
-                <article class="servicio-card h-100">
-                    <div class="servicio-icono"><i class="fas fa-headset"></i></div>
-                    <h4>Asesoria personalizada</h4>
-                    <p>Te ayudamos a elegir el producto ideal de acuerdo a tu necesidad y presupuesto.</p>
-                </article>
-            </div>
-        </div>
-    </section>
-    {% endif %}
-
     <div class="page-header">
         <div class="page-header-content">
             <h1 class="page-title"><i class="fas fa-store"></i> Productos Publicados</h1>
@@ -156,6 +106,62 @@
             {% endif %}
         </ul>
     </nav>
+    {% endif %}
+
+    {% if not user.is_authenticated %}
+    <section class="landing-hero mt-4 mb-3">
+        <div class="row align-items-center">
+            <div class="col-lg-7 mb-3 mb-lg-0">
+                <h2 class="landing-titulo">Una experiencia de compra confiable</h2>
+                <p class="landing-texto">Trabajamos con inventario real, atencion cercana y procesos agiles para que compres con confianza.</p>
+                <ul class="landing-puntos">
+                    <li><i class="fas fa-check-circle"></i> Catalogo actualizado todos los dias.</li>
+                    <li><i class="fas fa-check-circle"></i> Informacion clara de stock y precios.</li>
+                    <li><i class="fas fa-check-circle"></i> Asesoria personalizada en tienda.</li>
+                </ul>
+            </div>
+            <div class="col-lg-5">
+                <div class="landing-info-card">
+                    <h5><i class="fas fa-clock"></i> Horario de atencion</h5>
+                    <p class="mb-2">Lunes a Sabado, de 8:00 AM a 7:00 PM.</p>
+                    <h5><i class="fas fa-map-marker-alt"></i> Ubicacion</h5>
+                    <p class="mb-2">Centro Comercial Principal, Planta Baja.</p>
+                    <h5><i class="fas fa-phone-alt"></i> Contacto directo</h5>
+                    <p class="mb-0">+58 000-0000000</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="info-profesional mb-3">
+        <div class="info-profesional-header">
+            <h3>Lo que ofrecemos</h3>
+            <p>Servicios pensados para una compra rapida, clara y segura.</p>
+        </div>
+        <div class="row">
+            <div class="col-lg-4 mb-3 mb-lg-0">
+                <article class="servicio-card h-100">
+                    <div class="servicio-icono"><i class="fas fa-shipping-fast"></i></div>
+                    <h4>Entrega rapida</h4>
+                    <p>Gestionamos pedidos de forma agil para que recibas tus productos en el menor tiempo posible.</p>
+                </article>
+            </div>
+            <div class="col-lg-4 mb-3 mb-lg-0">
+                <article class="servicio-card h-100">
+                    <div class="servicio-icono"><i class="fas fa-certificate"></i></div>
+                    <h4>Calidad garantizada</h4>
+                    <p>Seleccionamos productos confiables y verificados para ofrecer una experiencia profesional.</p>
+                </article>
+            </div>
+            <div class="col-lg-4">
+                <article class="servicio-card h-100">
+                    <div class="servicio-icono"><i class="fas fa-shield-alt"></i></div>
+                    <h4>Compra segura</h4>
+                    <p>Te guiamos en cada paso, desde la seleccion del producto hasta la confirmacion de compra.</p>
+                </article>
+            </div>
+        </div>
+    </section>
     {% endif %}
 
     <div class="modal fade" id="modalProductoInicio" tabindex="-1" role="dialog" aria-hidden="true">
