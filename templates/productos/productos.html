@@ -90,7 +90,7 @@
                         <th>Categoria</th>
                         <th>Stock Unidad</th>
                         <th>Unid/Caja</th>
-                        <th>Stock Caja</th>
+                        {% comment %} <th>Stock Caja</th> {% endcomment %}
                         <th>Precio Unidad (Bs)</th>
                         <th>Precio Caja (Bs)</th>
                         <th>Publicado</th>
@@ -116,7 +116,7 @@
                         <td>{{ producto.categoria.nombre }}</td>
                         <td><span class="badge-stock">{{ producto.stock_unidad }} unidades</span></td>
                         <td>{{ producto.unidades_por_caja }}</td>
-                        <td><span class="badge-stock">{{ producto.stock_caja }} cajas</span></td>
+                        {% comment %} <td><span class="badge-stock">{{ producto.stock_caja }} cajas</span></td> {% endcomment %}
                         <td>Bs. {{ producto.precio_usd|floatformat:2 }}</td>
                         <td>Bs. {{ producto.precio_caja_bs|floatformat:2 }}</td>
                         <td>
